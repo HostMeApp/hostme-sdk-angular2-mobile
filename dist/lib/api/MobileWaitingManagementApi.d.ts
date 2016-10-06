@@ -1,0 +1,33 @@
+import { Http, Headers } from '@angular/http';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import * as models from '../model/models';
+import { Configuration } from '../configuration';
+export declare class MobileWaitingManagementApi {
+    protected http: Http;
+    protected basePath: string;
+    defaultHeaders: Headers;
+    configuration: Configuration;
+    constructor(http: Http, basePath: string, configuration: Configuration);
+    checkInWithWaiting(waitingItemId: number, extraHttpRequestParams?: any): Observable<models.Transaction>;
+    close(waitingItemId: number, extraHttpRequestParams?: any): Observable<{}>;
+    confirmWithApp(confirmationCode: number, conf: models.PhoneConfirmation, extraHttpRequestParams?: any): Observable<{}>;
+    getInLine(value: models.PutInLine, extraHttpRequestParams?: any): Observable<models.WaitingItem>;
+    getUserCurrentWaiting(extraHttpRequestParams?: any): Observable<models.WaitingItem>;
+    leaveTheLine(waitingItemId: number, extraHttpRequestParams?: any): Observable<{}>;
+    markAllMessagesAsRead(waitingItemId: number, extraHttpRequestParams?: any): Observable<{}>;
+    putOnHold(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<{}>;
+    sendMessageToWaiting(waitingItemId: number, createMessage: models.CreateMessage, extraHttpRequestParams?: any): Observable<{}>;
+    takeOffHold(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<{}>;
+    checkInWithWaitingWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response>;
+    closeWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response>;
+    confirmWithAppWithHttpInfo(confirmationCode: number, conf: models.PhoneConfirmation, extraHttpRequestParams?: any): Observable<Response>;
+    getInLineWithHttpInfo(value: models.PutInLine, extraHttpRequestParams?: any): Observable<Response>;
+    getUserCurrentWaitingWithHttpInfo(extraHttpRequestParams?: any): Observable<Response>;
+    leaveTheLineWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response>;
+    markAllMessagesAsReadWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response>;
+    putOnHoldWithHttpInfo(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<Response>;
+    sendMessageToWaitingWithHttpInfo(waitingItemId: number, createMessage: models.CreateMessage, extraHttpRequestParams?: any): Observable<Response>;
+    takeOffHoldWithHttpInfo(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<Response>;
+}
