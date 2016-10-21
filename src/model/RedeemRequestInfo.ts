@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface RedeemRequestInfo {
@@ -35,9 +38,11 @@ export interface RedeemRequestInfo {
 
 }
 export namespace RedeemRequestInfo {
+'use strict';
+
     export enum StatusEnum {
-        Submited = <any> 'Submited',
-        Approved = <any> 'Approved',
-        Rejected = <any> 'Rejected'
+        Submited = 'Submited' as any,
+        Approved = 'Approved' as any,
+        Rejected = 'Rejected' as any
     }
 }

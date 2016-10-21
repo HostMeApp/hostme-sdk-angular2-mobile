@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface IEdmSchemaElement {
@@ -33,11 +36,13 @@ export interface IEdmSchemaElement {
 
 }
 export namespace IEdmSchemaElement {
+'use strict';
+
     export enum SchemaElementKindEnum {
-        None = <any> 'None',
-        TypeDefinition = <any> 'TypeDefinition',
-        Function = <any> 'Function',
-        ValueTerm = <any> 'ValueTerm',
-        EntityContainer = <any> 'EntityContainer'
+        None = 'None' as any,
+        TypeDefinition = 'TypeDefinition' as any,
+        Function = 'Function' as any,
+        ValueTerm = 'ValueTerm' as any,
+        EntityContainer = 'EntityContainer' as any
     }
 }

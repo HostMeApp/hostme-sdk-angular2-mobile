@@ -1,0 +1,16 @@
+node_modules/
+*.log
+*.tgz
+
+src/
+tests/
+gulpfile.js
+tsconfig.json
+tslint.json
+typings.json
+typings
+karma
+webpack
+.swagger-codegen-ignore
+.npmignore
+.npmrc

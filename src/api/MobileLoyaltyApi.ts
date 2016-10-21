@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Injectable }                      from '@angular/core';
 import { Http, Headers, URLSearchParams }                    from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Response, ResponseContentType }                     from '@angular/http';
@@ -31,25 +31,16 @@ import { Observable }                                        from 'rxjs/Observab
 import 'rxjs/add/operator/map';
 
 import * as models                                           from '../model/models';
-import { BASE_PATH }                                         from '../variables';
 import { Configuration }                                     from '../configuration';
 
-/* tslint:disable:no-unused-variable member-ordering */
+/* tslint:disable:no-unused-variable member-ordering max-line-length */
 
 
 @Injectable()
 export class MobileLoyaltyApi {
-    protected basePath = 'http://hostme-services-qa.azurewebsites.net';
     public defaultHeaders: Headers = new Headers();
-    public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
-        if (configuration) {
-            this.configuration = configuration;
-        }
+    constructor(protected http: Http, protected configuration: Configuration) {
     }
 
     /**
@@ -204,12 +195,12 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public cancelMembershipAtRestaurantWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling cancelMembershipAtRestaurant.');
         }
 
@@ -220,27 +211,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Delete,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Delete,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -252,12 +242,12 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public enrollIntoLoyaltyProgramWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling enrollIntoLoyaltyProgram.');
         }
 
@@ -268,27 +258,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -299,7 +288,7 @@ export class MobileLoyaltyApi {
      * 
      */
     public getAllUserMembershipsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -311,27 +300,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -343,12 +331,12 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getCustomerRedeemRequestsWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}/redeems`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/redeems`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling getCustomerRedeemRequests.');
         }
 
@@ -359,27 +347,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -391,12 +378,12 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getMemberRewardOptionsWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}/rewards`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/rewards`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling getMemberRewardOptions.');
         }
 
@@ -407,27 +394,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -439,12 +425,12 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getMemberTransactionsWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}/transactions`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/transactions`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling getMemberTransactions.');
         }
 
@@ -455,27 +441,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -487,12 +472,12 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getMembershipByRestaurantIdWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling getMembershipByRestaurantId.');
         }
 
@@ -503,27 +488,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -536,16 +520,16 @@ export class MobileLoyaltyApi {
      * @param redeemId 
      */
     public getRedeemRequestInfoWithHttpInfo(restaurantId: number, redeemId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}/redeems/${redeemId}`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/redeems/${redeemId}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling getRedeemRequestInfo.');
         }
-        // verify required parameter 'redeemId' is not null or undefined
-        if (redeemId === null || redeemId === undefined) {
+        // verify required parameter 'redeemId' is undefined
+        if (redeemId === undefined) {
             throw new Error('Required parameter redeemId was null or undefined when calling getRedeemRequestInfo.');
         }
 
@@ -556,27 +540,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -589,16 +572,16 @@ export class MobileLoyaltyApi {
      * @param rewardId 
      */
     public submitRequestForRedeemWithHttpInfo(restaurantId: number, rewardId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/loyalty/mb/membership/${restaurantId}/rewards/${rewardId}/redeem`;
+        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/rewards/${rewardId}/redeem`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling submitRequestForRedeem.');
         }
-        // verify required parameter 'rewardId' is not null or undefined
-        if (rewardId === null || rewardId === undefined) {
+        // verify required parameter 'rewardId' is undefined
+        if (rewardId === undefined) {
             throw new Error('Required parameter rewardId was null or undefined when calling submitRequestForRedeem.');
         }
 
@@ -609,27 +592,26 @@ export class MobileLoyaltyApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);

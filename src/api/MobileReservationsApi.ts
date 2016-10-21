@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Injectable }                      from '@angular/core';
 import { Http, Headers, URLSearchParams }                    from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Response, ResponseContentType }                     from '@angular/http';
@@ -31,25 +31,16 @@ import { Observable }                                        from 'rxjs/Observab
 import 'rxjs/add/operator/map';
 
 import * as models                                           from '../model/models';
-import { BASE_PATH }                                         from '../variables';
 import { Configuration }                                     from '../configuration';
 
-/* tslint:disable:no-unused-variable member-ordering */
+/* tslint:disable:no-unused-variable member-ordering max-line-length */
 
 
 @Injectable()
 export class MobileReservationsApi {
-    protected basePath = 'http://hostme-services-qa.azurewebsites.net';
     public defaultHeaders: Headers = new Headers();
-    public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
-        if (configuration) {
-            this.configuration = configuration;
-        }
+    constructor(protected http: Http, protected configuration: Configuration) {
     }
 
     /**
@@ -174,53 +165,52 @@ export class MobileReservationsApi {
      * @param value 
      */
     public addNewReservationWithHttpInfo(value: models.CreateCustomerReservation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/rsv/mb/reservations`;
+        const path = this.configuration.basePath + `/api/rsv/mb/reservations`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'value' is not null or undefined
-        if (value === null || value === undefined) {
+        // verify required parameter 'value' is undefined
+        if (value === undefined) {
             throw new Error('Required parameter value was null or undefined when calling addNewReservation.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: value == undefined ? '' : JSON.stringify(value), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: value == null ? '' : JSON.stringify(value), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -233,57 +223,56 @@ export class MobileReservationsApi {
      * @param cancelReservationContract 
      */
     public closeAsCanceledWithHttpInfo(reservationId: string, cancelReservationContract: models.CancelReservation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/rsv/mb/reservations/${reservationId}/cancel`;
+        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}/cancel`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'reservationId' is not null or undefined
-        if (reservationId === null || reservationId === undefined) {
+        // verify required parameter 'reservationId' is undefined
+        if (reservationId === undefined) {
             throw new Error('Required parameter reservationId was null or undefined when calling closeAsCanceled.');
         }
-        // verify required parameter 'cancelReservationContract' is not null or undefined
-        if (cancelReservationContract === null || cancelReservationContract === undefined) {
+        // verify required parameter 'cancelReservationContract' is undefined
+        if (cancelReservationContract === undefined) {
             throw new Error('Required parameter cancelReservationContract was null or undefined when calling closeAsCanceled.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
+            body: cancelReservationContract == undefined ? '' : JSON.stringify(cancelReservationContract), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: cancelReservationContract == null ? '' : JSON.stringify(cancelReservationContract), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -295,12 +284,12 @@ export class MobileReservationsApi {
      * @param reservationId 
      */
     public getReservationByIdWithHttpInfo(reservationId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/rsv/mb/reservations/${reservationId}`;
+        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'reservationId' is not null or undefined
-        if (reservationId === null || reservationId === undefined) {
+        // verify required parameter 'reservationId' is undefined
+        if (reservationId === undefined) {
             throw new Error('Required parameter reservationId was null or undefined when calling getReservationById.');
         }
 
@@ -311,27 +300,26 @@ export class MobileReservationsApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -343,12 +331,12 @@ export class MobileReservationsApi {
      * @param queryOptions 
      */
     public getUserReservationsWithHttpInfo(queryOptions?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/rsv/mb/reservations`;
+        const path = this.configuration.basePath + `/api/rsv/mb/reservations`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         if (queryOptions !== undefined) {
-            queryParameters.set('queryOptions', <any>queryOptions);
+            queryParameters.set('queryOptions', queryOptions as any);
         }
 
 
@@ -358,27 +346,26 @@ export class MobileReservationsApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -390,12 +377,12 @@ export class MobileReservationsApi {
      * @param reservationId Reservation identifier
      */
     public readAllMessageWithHttpInfo(reservationId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/rsv/mb/reservations/${reservationId}/messages/readall`;
+        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}/messages/readall`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'reservationId' is not null or undefined
-        if (reservationId === null || reservationId === undefined) {
+        // verify required parameter 'reservationId' is undefined
+        if (reservationId === undefined) {
             throw new Error('Required parameter reservationId was null or undefined when calling readAllMessage.');
         }
 
@@ -406,27 +393,26 @@ export class MobileReservationsApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -439,57 +425,56 @@ export class MobileReservationsApi {
      * @param createMessageContract The message with body
      */
     public sendMessageToReservationWithHttpInfo(reservationId: string, createMessageContract: models.CreateMessage, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/rsv/mb/reservations/${reservationId}/messages`;
+        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}/messages`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'reservationId' is not null or undefined
-        if (reservationId === null || reservationId === undefined) {
+        // verify required parameter 'reservationId' is undefined
+        if (reservationId === undefined) {
             throw new Error('Required parameter reservationId was null or undefined when calling sendMessageToReservation.');
         }
-        // verify required parameter 'createMessageContract' is not null or undefined
-        if (createMessageContract === null || createMessageContract === undefined) {
+        // verify required parameter 'createMessageContract' is undefined
+        if (createMessageContract === undefined) {
             throw new Error('Required parameter createMessageContract was null or undefined when calling sendMessageToReservation.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: createMessageContract == undefined ? '' : JSON.stringify(createMessageContract), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: createMessageContract == null ? '' : JSON.stringify(createMessageContract), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -502,57 +487,56 @@ export class MobileReservationsApi {
      * @param value 
      */
     public updateReservationWithHttpInfo(reservationId: string, value: models.UpdateReservation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/rsv/mb/reservations/${reservationId}`;
+        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'reservationId' is not null or undefined
-        if (reservationId === null || reservationId === undefined) {
+        // verify required parameter 'reservationId' is undefined
+        if (reservationId === undefined) {
             throw new Error('Required parameter reservationId was null or undefined when calling updateReservation.');
         }
-        // verify required parameter 'value' is not null or undefined
-        if (value === null || value === undefined) {
+        // verify required parameter 'value' is undefined
+        if (value === undefined) {
             throw new Error('Required parameter value was null or undefined when calling updateReservation.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
+            body: value == undefined ? '' : JSON.stringify(value), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: value == null ? '' : JSON.stringify(value), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);

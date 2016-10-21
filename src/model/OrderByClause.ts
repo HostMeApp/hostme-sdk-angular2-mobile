@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface OrderByClause {
@@ -37,8 +40,10 @@ export interface OrderByClause {
 
 }
 export namespace OrderByClause {
+'use strict';
+
     export enum DirectionEnum {
-        Ascending = <any> 'Ascending',
-        Descending = <any> 'Descending'
+        Ascending = 'Ascending' as any,
+        Descending = 'Descending' as any
     }
 }

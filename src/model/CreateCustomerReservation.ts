@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface CreateCustomerReservation {
@@ -35,7 +38,7 @@ export interface CreateCustomerReservation {
 
     deviceType: string;
 
-    areas: string;
+    areas?: string;
 
     note?: string;
 

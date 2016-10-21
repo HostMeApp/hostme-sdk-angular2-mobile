@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Injectable }                      from '@angular/core';
 import { Http, Headers, URLSearchParams }                    from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Response, ResponseContentType }                     from '@angular/http';
@@ -31,25 +31,16 @@ import { Observable }                                        from 'rxjs/Observab
 import 'rxjs/add/operator/map';
 
 import * as models                                           from '../model/models';
-import { BASE_PATH }                                         from '../variables';
 import { Configuration }                                     from '../configuration';
 
-/* tslint:disable:no-unused-variable member-ordering */
+/* tslint:disable:no-unused-variable member-ordering max-line-length */
 
 
 @Injectable()
 export class MobileWaitingManagementApi {
-    protected basePath = 'http://hostme-services-qa.azurewebsites.net';
     public defaultHeaders: Headers = new Headers();
-    public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
-        if (configuration) {
-            this.configuration = configuration;
-        }
+    constructor(protected http: Http, protected configuration: Configuration) {
     }
 
     /**
@@ -222,12 +213,12 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId 
      */
     public checkInWithWaitingWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/${waitingItemId}/checkin`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/checkin`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'waitingItemId' is not null or undefined
-        if (waitingItemId === null || waitingItemId === undefined) {
+        // verify required parameter 'waitingItemId' is undefined
+        if (waitingItemId === undefined) {
             throw new Error('Required parameter waitingItemId was null or undefined when calling checkInWithWaiting.');
         }
 
@@ -238,27 +229,26 @@ export class MobileWaitingManagementApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -270,12 +260,12 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Identifier of the waiting item
      */
     public closeWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/${waitingItemId}/close`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/close`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'waitingItemId' is not null or undefined
-        if (waitingItemId === null || waitingItemId === undefined) {
+        // verify required parameter 'waitingItemId' is undefined
+        if (waitingItemId === undefined) {
             throw new Error('Required parameter waitingItemId was null or undefined when calling close.');
         }
 
@@ -286,27 +276,26 @@ export class MobileWaitingManagementApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -319,57 +308,56 @@ export class MobileWaitingManagementApi {
      * @param conf Conformation model
      */
     public confirmWithAppWithHttpInfo(confirmationCode: number, conf: models.PhoneConfirmation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/confirm/${confirmationCode}`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/confirm/${confirmationCode}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'confirmationCode' is not null or undefined
-        if (confirmationCode === null || confirmationCode === undefined) {
+        // verify required parameter 'confirmationCode' is undefined
+        if (confirmationCode === undefined) {
             throw new Error('Required parameter confirmationCode was null or undefined when calling confirmWithApp.');
         }
-        // verify required parameter 'conf' is not null or undefined
-        if (conf === null || conf === undefined) {
+        // verify required parameter 'conf' is undefined
+        if (conf === undefined) {
             throw new Error('Required parameter conf was null or undefined when calling confirmWithApp.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: conf == undefined ? '' : JSON.stringify(conf), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: conf == null ? '' : JSON.stringify(conf), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -381,53 +369,52 @@ export class MobileWaitingManagementApi {
      * @param value 
      */
     public getInLineWithHttpInfo(value: models.PutInLine, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'value' is not null or undefined
-        if (value === null || value === undefined) {
+        // verify required parameter 'value' is undefined
+        if (value === undefined) {
             throw new Error('Required parameter value was null or undefined when calling getInLine.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: value == undefined ? '' : JSON.stringify(value), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: value == null ? '' : JSON.stringify(value), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -438,7 +425,7 @@ export class MobileWaitingManagementApi {
      * 
      */
     public getUserCurrentWaitingWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -450,27 +437,26 @@ export class MobileWaitingManagementApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -482,12 +468,12 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public leaveTheLineWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/${waitingItemId}/cancel`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/cancel`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'waitingItemId' is not null or undefined
-        if (waitingItemId === null || waitingItemId === undefined) {
+        // verify required parameter 'waitingItemId' is undefined
+        if (waitingItemId === undefined) {
             throw new Error('Required parameter waitingItemId was null or undefined when calling leaveTheLine.');
         }
 
@@ -498,27 +484,26 @@ export class MobileWaitingManagementApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -530,12 +515,12 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public markAllMessagesAsReadWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/${waitingItemId}/messages/readall`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/messages/readall`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'waitingItemId' is not null or undefined
-        if (waitingItemId === null || waitingItemId === undefined) {
+        // verify required parameter 'waitingItemId' is undefined
+        if (waitingItemId === undefined) {
             throw new Error('Required parameter waitingItemId was null or undefined when calling markAllMessagesAsRead.');
         }
 
@@ -546,27 +531,26 @@ export class MobileWaitingManagementApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -579,20 +563,20 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public putOnHoldWithHttpInfo(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/${waitingItemId}/putonhold`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/putonhold`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling putOnHold.');
         }
-        // verify required parameter 'waitingItemId' is not null or undefined
-        if (waitingItemId === null || waitingItemId === undefined) {
+        // verify required parameter 'waitingItemId' is undefined
+        if (waitingItemId === undefined) {
             throw new Error('Required parameter waitingItemId was null or undefined when calling putOnHold.');
         }
         if (restaurantId !== undefined) {
-            queryParameters.set('restaurantId', <any>restaurantId);
+            queryParameters.set('restaurantId', restaurantId as any);
         }
 
 
@@ -602,27 +586,26 @@ export class MobileWaitingManagementApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -635,57 +618,56 @@ export class MobileWaitingManagementApi {
      * @param createMessage The body of the message
      */
     public sendMessageToWaitingWithHttpInfo(waitingItemId: number, createMessage: models.CreateMessage, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/${waitingItemId}/sendmessage`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/sendmessage`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'waitingItemId' is not null or undefined
-        if (waitingItemId === null || waitingItemId === undefined) {
+        // verify required parameter 'waitingItemId' is undefined
+        if (waitingItemId === undefined) {
             throw new Error('Required parameter waitingItemId was null or undefined when calling sendMessageToWaiting.');
         }
-        // verify required parameter 'createMessage' is not null or undefined
-        if (createMessage === null || createMessage === undefined) {
+        // verify required parameter 'createMessage' is undefined
+        if (createMessage === undefined) {
             throw new Error('Required parameter createMessage was null or undefined when calling sendMessageToWaiting.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: createMessage == undefined ? '' : JSON.stringify(createMessage), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: createMessage == null ? '' : JSON.stringify(createMessage), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -698,20 +680,20 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public takeOffHoldWithHttpInfo(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/wm/mb/waitings/${waitingItemId}/takeoffhold`;
+        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/takeoffhold`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling takeOffHold.');
         }
-        // verify required parameter 'waitingItemId' is not null or undefined
-        if (waitingItemId === null || waitingItemId === undefined) {
+        // verify required parameter 'waitingItemId' is undefined
+        if (waitingItemId === undefined) {
             throw new Error('Required parameter waitingItemId was null or undefined when calling takeOffHold.');
         }
         if (restaurantId !== undefined) {
-            queryParameters.set('restaurantId', <any>restaurantId);
+            queryParameters.set('restaurantId', restaurantId as any);
         }
 
 
@@ -721,27 +703,26 @@ export class MobileWaitingManagementApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);

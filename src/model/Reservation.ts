@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface Reservation {
@@ -71,8 +74,10 @@ export interface Reservation {
 
 }
 export namespace Reservation {
+'use strict';
+
     export enum TypeEnum {
-        Standard = <any> 'Standard',
-        Hybrid = <any> 'Hybrid'
+        Standard = 'Standard' as any,
+        Hybrid = 'Hybrid' as any
     }
 }

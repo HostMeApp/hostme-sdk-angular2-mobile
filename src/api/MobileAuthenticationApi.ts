@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Injectable }                      from '@angular/core';
 import { Http, Headers, URLSearchParams }                    from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Response, ResponseContentType }                     from '@angular/http';
@@ -31,25 +31,16 @@ import { Observable }                                        from 'rxjs/Observab
 import 'rxjs/add/operator/map';
 
 import * as models                                           from '../model/models';
-import { BASE_PATH }                                         from '../variables';
 import { Configuration }                                     from '../configuration';
 
-/* tslint:disable:no-unused-variable member-ordering */
+/* tslint:disable:no-unused-variable member-ordering max-line-length */
 
 
 @Injectable()
 export class MobileAuthenticationApi {
-    protected basePath = 'http://hostme-services-qa.azurewebsites.net';
     public defaultHeaders: Headers = new Headers();
-    public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
-        if (configuration) {
-            this.configuration = configuration;
-        }
+    constructor(protected http: Http, protected configuration: Configuration) {
     }
 
     /**
@@ -109,16 +100,16 @@ export class MobileAuthenticationApi {
      * @param accessToken 
      */
     public getExternalFacebookLoginWithHttpInfo(accessToken: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/authorization/externalFacebookLogin`;
+        const path = this.configuration.basePath + `/authorization/externalFacebookLogin`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'accessToken' is not null or undefined
-        if (accessToken === null || accessToken === undefined) {
+        // verify required parameter 'accessToken' is undefined
+        if (accessToken === undefined) {
             throw new Error('Required parameter accessToken was null or undefined when calling getExternalFacebookLogin.');
         }
         if (accessToken !== undefined) {
-            queryParameters.set('access_token', <any>accessToken);
+            queryParameters.set('access_token', accessToken as any);
         }
 
 
@@ -128,21 +119,21 @@ export class MobileAuthenticationApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
-            
+
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -155,19 +146,19 @@ export class MobileAuthenticationApi {
      * @param error 
      */
     public getExternalLoginWithHttpInfo(provider: string, error?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/authorization/externalLogin`;
+        const path = this.configuration.basePath + `/authorization/externalLogin`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'provider' is not null or undefined
-        if (provider === null || provider === undefined) {
+        // verify required parameter 'provider' is undefined
+        if (provider === undefined) {
             throw new Error('Required parameter provider was null or undefined when calling getExternalLogin.');
         }
         if (provider !== undefined) {
-            queryParameters.set('provider', <any>provider);
+            queryParameters.set('provider', provider as any);
         }
         if (error !== undefined) {
-            queryParameters.set('error', <any>error);
+            queryParameters.set('error', error as any);
         }
 
 
@@ -177,21 +168,21 @@ export class MobileAuthenticationApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
-            
+
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -204,19 +195,19 @@ export class MobileAuthenticationApi {
      * @param generateState 
      */
     public getExternalLoginsWithHttpInfo(returnUrl: string, generateState?: boolean, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/authorization/externalLogins`;
+        const path = this.configuration.basePath + `/authorization/externalLogins`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'returnUrl' is not null or undefined
-        if (returnUrl === null || returnUrl === undefined) {
+        // verify required parameter 'returnUrl' is undefined
+        if (returnUrl === undefined) {
             throw new Error('Required parameter returnUrl was null or undefined when calling getExternalLogins.');
         }
         if (returnUrl !== undefined) {
-            queryParameters.set('returnUrl', <any>returnUrl);
+            queryParameters.set('returnUrl', returnUrl as any);
         }
         if (generateState !== undefined) {
-            queryParameters.set('generateState', <any>generateState);
+            queryParameters.set('generateState', generateState as any);
         }
 
 
@@ -226,21 +217,21 @@ export class MobileAuthenticationApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
-            
+
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);

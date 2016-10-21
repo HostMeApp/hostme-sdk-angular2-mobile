@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface IEdmType {
@@ -29,14 +32,16 @@ export interface IEdmType {
 
 }
 export namespace IEdmType {
+'use strict';
+
     export enum TypeKindEnum {
-        None = <any> 'None',
-        Primitive = <any> 'Primitive',
-        Entity = <any> 'Entity',
-        Complex = <any> 'Complex',
-        Row = <any> 'Row',
-        Collection = <any> 'Collection',
-        EntityReference = <any> 'EntityReference',
-        Enum = <any> 'Enum'
+        None = 'None' as any,
+        Primitive = 'Primitive' as any,
+        Entity = 'Entity' as any,
+        Complex = 'Complex' as any,
+        Row = 'Row' as any,
+        Collection = 'Collection' as any,
+        EntityReference = 'EntityReference' as any,
+        Enum = 'Enum' as any
     }
 }

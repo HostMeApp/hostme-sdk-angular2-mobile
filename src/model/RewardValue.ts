@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface RewardValue {
@@ -35,9 +38,11 @@ export interface RewardValue {
 
 }
 export namespace RewardValue {
+'use strict';
+
     export enum TypeEnum {
-        Discount = <any> 'Discount',
-        FreeMeal = <any> 'FreeMeal',
-        MoneyOff = <any> 'MoneyOff'
+        Discount = 'Discount' as any,
+        FreeMeal = 'FreeMeal' as any,
+        MoneyOff = 'MoneyOff' as any
     }
 }

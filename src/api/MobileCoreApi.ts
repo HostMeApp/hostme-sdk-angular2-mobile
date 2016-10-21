@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Injectable }                      from '@angular/core';
 import { Http, Headers, URLSearchParams }                    from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Response, ResponseContentType }                     from '@angular/http';
@@ -31,25 +31,16 @@ import { Observable }                                        from 'rxjs/Observab
 import 'rxjs/add/operator/map';
 
 import * as models                                           from '../model/models';
-import { BASE_PATH }                                         from '../variables';
 import { Configuration }                                     from '../configuration';
 
-/* tslint:disable:no-unused-variable member-ordering */
+/* tslint:disable:no-unused-variable member-ordering max-line-length */
 
 
 @Injectable()
 export class MobileCoreApi {
-    protected basePath = 'http://hostme-services-qa.azurewebsites.net';
     public defaultHeaders: Headers = new Headers();
-    public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-        if (basePath) {
-            this.basePath = basePath;
-        }
-        if (configuration) {
-            this.configuration = configuration;
-        }
+    constructor(protected http: Http, protected configuration: Configuration) {
     }
 
     /**
@@ -398,53 +389,52 @@ export class MobileCoreApi {
      * @param model 
      */
     public addExternalLoginWithHttpInfo(model: models.AddExternalLogin, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/addExternalLogin`;
+        const path = this.configuration.basePath + `/api/core/mb/account/addExternalLogin`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'model' is not null or undefined
-        if (model === null || model === undefined) {
+        // verify required parameter 'model' is undefined
+        if (model === undefined) {
             throw new Error('Required parameter model was null or undefined when calling addExternalLogin.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: model == undefined ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: model == null ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -456,53 +446,52 @@ export class MobileCoreApi {
      * @param model 
      */
     public changePasswordWithHttpInfo(model: models.ChangePassword, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/changePassword`;
+        const path = this.configuration.basePath + `/api/core/mb/account/changePassword`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'model' is not null or undefined
-        if (model === null || model === undefined) {
+        // verify required parameter 'model' is undefined
+        if (model === undefined) {
             throw new Error('Required parameter model was null or undefined when calling changePassword.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: model == undefined ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: model == null ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -514,53 +503,52 @@ export class MobileCoreApi {
      * @param checkinContract 
      */
     public checkInWithHttpInfo(checkinContract: models.TransactionCheckin, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/restaurant/checkin`;
+        const path = this.configuration.basePath + `/api/core/mb/restaurant/checkin`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'checkinContract' is not null or undefined
-        if (checkinContract === null || checkinContract === undefined) {
+        // verify required parameter 'checkinContract' is undefined
+        if (checkinContract === undefined) {
             throw new Error('Required parameter checkinContract was null or undefined when calling checkIn.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
+            body: checkinContract == undefined ? '' : JSON.stringify(checkinContract), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: checkinContract == null ? '' : JSON.stringify(checkinContract), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -575,21 +563,21 @@ export class MobileCoreApi {
      * @param city 
      */
     public findRestaurantsWithHttpInfo(lat?: number, lon?: number, name?: string, city?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/restaurants/find`;
+        const path = this.configuration.basePath + `/api/core/mb/restaurants/find`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         if (lat !== undefined) {
-            queryParameters.set('lat', <any>lat);
+            queryParameters.set('lat', lat as any);
         }
         if (lon !== undefined) {
-            queryParameters.set('lon', <any>lon);
+            queryParameters.set('lon', lon as any);
         }
         if (name !== undefined) {
-            queryParameters.set('name', <any>name);
+            queryParameters.set('name', name as any);
         }
         if (city !== undefined) {
-            queryParameters.set('city', <any>city);
+            queryParameters.set('city', city as any);
         }
 
 
@@ -599,27 +587,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -630,7 +617,7 @@ export class MobileCoreApi {
      * 
      */
     public getAllRestaurantsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/restaurants`;
+        const path = this.configuration.basePath + `/api/core/mb/restaurants`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -642,27 +629,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -673,7 +659,7 @@ export class MobileCoreApi {
      * 
      */
     public getListOfLocationsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/locations`;
+        const path = this.configuration.basePath + `/api/core/mb/locations`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -685,27 +671,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -718,19 +703,19 @@ export class MobileCoreApi {
      * @param generateState 
      */
     public getManageInfoWithHttpInfo(returnUrl: string, generateState?: boolean, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/manageInfo`;
+        const path = this.configuration.basePath + `/api/core/mb/account/manageInfo`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'returnUrl' is not null or undefined
-        if (returnUrl === null || returnUrl === undefined) {
+        // verify required parameter 'returnUrl' is undefined
+        if (returnUrl === undefined) {
             throw new Error('Required parameter returnUrl was null or undefined when calling getManageInfo.');
         }
         if (returnUrl !== undefined) {
-            queryParameters.set('returnUrl', <any>returnUrl);
+            queryParameters.set('returnUrl', returnUrl as any);
         }
         if (generateState !== undefined) {
-            queryParameters.set('generateState', <any>generateState);
+            queryParameters.set('generateState', generateState as any);
         }
 
 
@@ -740,27 +725,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -772,12 +756,12 @@ export class MobileCoreApi {
      * @param token 
      */
     public getRegistrationTokenWithHttpInfo(token: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/campaign/${token}`;
+        const path = this.configuration.basePath + `/api/core/mb/campaign/${token}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'token' is not null or undefined
-        if (token === null || token === undefined) {
+        // verify required parameter 'token' is undefined
+        if (token === undefined) {
             throw new Error('Required parameter token was null or undefined when calling getRegistrationToken.');
         }
 
@@ -788,27 +772,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -824,37 +807,37 @@ export class MobileCoreApi {
      * @param areas 
      */
     public getReservationAvailabilityWithHttpInfo(restaurantId: number, date: Date, partySize: number, rangeInMinutes: number, areas?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/restaurants/${restaurantId}/availability`;
+        const path = this.configuration.basePath + `/api/core/mb/restaurants/${restaurantId}/availability`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'restaurantId' is not null or undefined
-        if (restaurantId === null || restaurantId === undefined) {
+        // verify required parameter 'restaurantId' is undefined
+        if (restaurantId === undefined) {
             throw new Error('Required parameter restaurantId was null or undefined when calling getReservationAvailability.');
         }
-        // verify required parameter 'date' is not null or undefined
-        if (date === null || date === undefined) {
+        // verify required parameter 'date' is undefined
+        if (date === undefined) {
             throw new Error('Required parameter date was null or undefined when calling getReservationAvailability.');
         }
-        // verify required parameter 'partySize' is not null or undefined
-        if (partySize === null || partySize === undefined) {
+        // verify required parameter 'partySize' is undefined
+        if (partySize === undefined) {
             throw new Error('Required parameter partySize was null or undefined when calling getReservationAvailability.');
         }
-        // verify required parameter 'rangeInMinutes' is not null or undefined
-        if (rangeInMinutes === null || rangeInMinutes === undefined) {
+        // verify required parameter 'rangeInMinutes' is undefined
+        if (rangeInMinutes === undefined) {
             throw new Error('Required parameter rangeInMinutes was null or undefined when calling getReservationAvailability.');
         }
         if (date !== undefined) {
-            queryParameters.set('date', <any>date);
+            queryParameters.set('date', date as any);
         }
         if (partySize !== undefined) {
-            queryParameters.set('partySize', <any>partySize);
+            queryParameters.set('partySize', partySize as any);
         }
         if (rangeInMinutes !== undefined) {
-            queryParameters.set('rangeInMinutes', <any>rangeInMinutes);
+            queryParameters.set('rangeInMinutes', rangeInMinutes as any);
         }
         if (areas !== undefined) {
-            queryParameters.set('areas', <any>areas);
+            queryParameters.set('areas', areas as any);
         }
 
 
@@ -864,27 +847,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -896,12 +878,12 @@ export class MobileCoreApi {
      * @param id 
      */
     public getRestaurantByIdWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/restaurants/${id}`;
+        const path = this.configuration.basePath + `/api/core/mb/restaurants/${id}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
+        // verify required parameter 'id' is undefined
+        if (id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getRestaurantById.');
         }
 
@@ -912,27 +894,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -943,7 +924,7 @@ export class MobileCoreApi {
      * 
      */
     public getUserInfoWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/userInfo`;
+        const path = this.configuration.basePath + `/api/core/mb/account/userInfo`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -955,27 +936,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -986,7 +966,7 @@ export class MobileCoreApi {
      * 
      */
     public getUserProfileWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/profile`;
+        const path = this.configuration.basePath + `/api/core/mb/account/profile`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -998,27 +978,26 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1030,48 +1009,47 @@ export class MobileCoreApi {
      * @param image 
      */
     public postProfileImageWithHttpInfo(image: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/profile/image`;
+        const path = this.configuration.basePath + `/api/core/mb/account/profile/image`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'image' is not null or undefined
-        if (image === null || image === undefined) {
+        // verify required parameter 'image' is undefined
+        if (image === undefined) {
             throw new Error('Required parameter image was null or undefined when calling postProfileImage.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'image/jpg', 
-            'image/jpeg', 
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: image == undefined ? '' : JSON.stringify(image), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: image == null ? '' : JSON.stringify(image), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1082,7 +1060,7 @@ export class MobileCoreApi {
      * 
      */
     public profileImageWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/profile/image`;
+        const path = this.configuration.basePath + `/api/core/mb/account/profile/image`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1094,28 +1072,27 @@ export class MobileCoreApi {
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
             'application/octet-stream'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Get,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1127,53 +1104,52 @@ export class MobileCoreApi {
      * @param model 
      */
     public registerWithHttpInfo(model: models.RegisterUser, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/register`;
+        const path = this.configuration.basePath + `/api/core/mb/account/register`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'model' is not null or undefined
-        if (model === null || model === undefined) {
+        // verify required parameter 'model' is undefined
+        if (model === undefined) {
             throw new Error('Required parameter model was null or undefined when calling register.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: model == undefined ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: model == null ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1185,53 +1161,52 @@ export class MobileCoreApi {
      * @param model 
      */
     public registerExternalWithHttpInfo(model: models.RegisterExternalUser, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/registerExternal`;
+        const path = this.configuration.basePath + `/api/core/mb/account/registerExternal`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'model' is not null or undefined
-        if (model === null || model === undefined) {
+        // verify required parameter 'model' is undefined
+        if (model === undefined) {
             throw new Error('Required parameter model was null or undefined when calling registerExternal.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: model == undefined ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: model == null ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1243,53 +1218,52 @@ export class MobileCoreApi {
      * @param model 
      */
     public removeLoginWithHttpInfo(model: models.RemoveLogin, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/removeLogin`;
+        const path = this.configuration.basePath + `/api/core/mb/account/removeLogin`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'model' is not null or undefined
-        if (model === null || model === undefined) {
+        // verify required parameter 'model' is undefined
+        if (model === undefined) {
             throw new Error('Required parameter model was null or undefined when calling removeLogin.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: model == undefined ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: model == null ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1301,53 +1275,52 @@ export class MobileCoreApi {
      * @param model 
      */
     public resetPasswordWithHttpInfo(model: models.ResetPassword, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/resetPassword`;
+        const path = this.configuration.basePath + `/api/core/mb/account/resetPassword`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'model' is not null or undefined
-        if (model === null || model === undefined) {
+        // verify required parameter 'model' is undefined
+        if (model === undefined) {
             throw new Error('Required parameter model was null or undefined when calling resetPassword.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: model == undefined ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: model == null ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1359,53 +1332,52 @@ export class MobileCoreApi {
      * @param model 
      */
     public setPasswordWithHttpInfo(model: models.SetPassword, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/setPassword`;
+        const path = this.configuration.basePath + `/api/core/mb/account/setPassword`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'model' is not null or undefined
-        if (model === null || model === undefined) {
+        // verify required parameter 'model' is undefined
+        if (model === undefined) {
             throw new Error('Required parameter model was null or undefined when calling setPassword.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: model == undefined ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: model == null ? '' : JSON.stringify(model), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1417,53 +1389,52 @@ export class MobileCoreApi {
      * @param channel 
      */
     public setPushChannelAsyncWithHttpInfo(channel: models.SetPushChannel, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/setPushChannel`;
+        const path = this.configuration.basePath + `/api/core/mb/account/setPushChannel`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'channel' is not null or undefined
-        if (channel === null || channel === undefined) {
+        // verify required parameter 'channel' is undefined
+        if (channel === undefined) {
             throw new Error('Required parameter channel was null or undefined when calling setPushChannelAsync.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            body: channel == undefined ? '' : JSON.stringify(channel), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: channel == null ? '' : JSON.stringify(channel), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Post,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);
@@ -1475,53 +1446,52 @@ export class MobileCoreApi {
      * @param profile 
      */
     public updateUserProfileWithHttpInfo(profile: models.UserProfile, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/core/mb/account/profile`;
+        const path = this.configuration.basePath + `/api/core/mb/account/profile`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'profile' is not null or undefined
-        if (profile === null || profile === undefined) {
+        // verify required parameter 'profile' is undefined
+        if (profile === undefined) {
             throw new Error('Required parameter profile was null or undefined when calling updateUserProfile.');
         }
 
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
-            'text/xml', 
-            'application/x-www-form-urlencoded', 
-            'image/jpg', 
-            'image/jpeg', 
+            'application/json',
+            'text/json',
+            'application/xml',
+            'text/xml',
+            'application/x-www-form-urlencoded',
+            'image/jpg',
+            'image/jpeg',
             'image/png'
         ];
 
         // to determine the Accept header
         let produces: string[] = [
-            'application/json', 
-            'text/json', 
-            'application/xml', 
+            'application/json',
+            'text/json',
+            'application/xml',
             'text/xml'
         ];
-        
+
         // authentication (oauth2) required
         // oauth required
-        if (this.configuration.accessToken)
-        {
+        if (this.configuration.accessToken) {
             headers.set('Authorization', 'Bearer ' + this.configuration.accessToken);
         }
-            
+
 
         headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
+            body: profile == undefined ? '' : JSON.stringify(profile), // https://github.com/angular/angular/issues/10612
             headers: headers,
-            body: profile == null ? '' : JSON.stringify(profile), // https://github.com/angular/angular/issues/10612
-            search: queryParameters,
-            responseType: ResponseContentType.Json
+            method: RequestMethod.Put,
+            responseType: ResponseContentType.Json,
+            search: queryParameters
         });
 
         return this.http.request(path, requestOptions);

@@ -22,6 +22,9 @@
  * limitations under the License.
  */
 
+
+/* tslint:disable:no-unused-variable member-ordering max-line-length interface-name */
+
 import * as models from './models';
 
 export interface OnlineAvailability {
@@ -37,10 +40,12 @@ export interface OnlineAvailability {
 
 }
 export namespace OnlineAvailability {
+'use strict';
+
     export enum AvailabilityLevelEnum {
-        Available = <any> 'Available',
-        AvailableForWait = <any> 'AvailableForWait',
-        NotEnoughCovers = <any> 'NotEnoughCovers',
-        Overbooked = <any> 'Overbooked'
+        Available = 'Available' as any,
+        AvailableForWait = 'AvailableForWait' as any,
+        NotEnoughCovers = 'NotEnoughCovers' as any,
+        Overbooked = 'Overbooked' as any
     }
 }
