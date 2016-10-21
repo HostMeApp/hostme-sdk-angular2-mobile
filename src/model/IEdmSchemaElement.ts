@@ -29,11 +29,8 @@ import * as models from './models';
 
 export interface IEdmSchemaElement {
     schemaElementKind?: IEdmSchemaElement.SchemaElementKindEnum;
-
     namespace?: string;
-
     name?: string;
-
 }
 export namespace IEdmSchemaElement {
 'use strict';

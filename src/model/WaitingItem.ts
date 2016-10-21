@@ -29,65 +29,34 @@ import * as models from './models';
 
 export interface WaitingItem {
     id?: number;
-
     status?: string;
-
-    created?: Date;
-
-    closed?: Date;
-
+    created?: string;
+    closed?: string;
     confirmationCode?: number;
-
     customerName?: string;
-
     groupSize?: number;
-
     phone?: string;
-
     registrationMethod?: string;
-
     deviceType?: string;
-
     notificationUrl?: string;
-
     areas?: string;
-
-    expectedTime?: Date;
-
+    expectedTime?: string;
     position?: number;
-
     note?: string;
-
     tableNumber?: string;
-
-    statusTime?: Date;
-
+    statusTime?: string;
     restaurantId?: number;
-
     highChair?: boolean;
-
     stroller?: boolean;
-
     onHoldMode?: string;
-
-    onHoldTime?: Date;
-
-    onHoldEndTime?: Date;
-
+    onHoldTime?: string;
+    onHoldEndTime?: string;
     messages?: Array<models.Message>;
-
     membership?: models.MembershipInfo;
-
     reservation?: models.ReservationInfo;
-
     estimatedTurnOverTime?: number;
-
     unreadMessageCount?: number;
-
     restaurant?: models.RestaurantContactInfo;
-
     customerProfile?: models.Profile;
-
     party?: boolean;
-
 }

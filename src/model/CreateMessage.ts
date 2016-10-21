@@ -29,5 +29,4 @@ import * as models from './models';
 
 export interface CreateMessage {
     body: string;
-
 }

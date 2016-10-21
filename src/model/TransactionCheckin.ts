@@ -29,5 +29,4 @@ import * as models from './models';
 
 export interface TransactionCheckin {
     token?: string;
-
 }

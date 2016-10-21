@@ -29,9 +29,7 @@ import * as models from './models';
 
 export interface SingleValueNode {
     typeReference?: models.IEdmTypeReference;
-
     kind?: SingleValueNode.KindEnum;
-
 }
 export namespace SingleValueNode {
 'use strict';

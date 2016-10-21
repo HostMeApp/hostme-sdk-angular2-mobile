@@ -29,15 +29,10 @@ import * as models from './models';
 
 export interface OnlineAvailability {
     acceptReservations?: boolean;
-
     availabilityLevel?: OnlineAvailability.AvailabilityLevelEnum;
-
     open?: boolean;
-
     requestedTime?: boolean;
-
     time?: string;
-
 }
 export namespace OnlineAvailability {
 'use strict';

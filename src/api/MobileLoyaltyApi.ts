@@ -22,7 +22,7 @@
  * limitations under the License.
  */
 
-import { Injectable }                      from '@angular/core';
+import { Injectable }                      					 from '@angular/core';
 import { Http, Headers, URLSearchParams }                    from '@angular/http';
 import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
 import { Response, ResponseContentType }                     from '@angular/http';

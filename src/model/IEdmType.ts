@@ -29,7 +29,6 @@ import * as models from './models';
 
 export interface IEdmType {
     typeKind?: IEdmType.TypeKindEnum;
-
 }
 export namespace IEdmType {
 'use strict';

@@ -29,13 +29,9 @@ import * as models from './models';
 
 export interface RewardValue {
     amount?: number;
-
     discount?: number;
-
     freeMeal?: string;
-
     type?: RewardValue.TypeEnum;
-
 }
 export namespace RewardValue {
 'use strict';

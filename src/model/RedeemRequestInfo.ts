@@ -29,13 +29,9 @@ import * as models from './models';
 
 export interface RedeemRequestInfo {
     id?: string;
-
     status?: RedeemRequestInfo.StatusEnum;
-
     statusComment?: string;
-
     tableNumber?: string;
-
 }
 export namespace RedeemRequestInfo {
 'use strict';

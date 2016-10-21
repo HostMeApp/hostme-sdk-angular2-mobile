@@ -29,21 +29,12 @@ import * as models from './models';
 
 export interface Message {
     id?: number;
-
     body?: string;
-
-    time?: Date;
-
+    time?: string;
     origin?: string;
-
     isAutoMessage?: boolean;
-
     deliveryStatus?: string;
-
-    deliveryTime?: Date;
-
+    deliveryTime?: string;
     deliveryFailureReason?: string;
-
     isRead?: boolean;
-
 }

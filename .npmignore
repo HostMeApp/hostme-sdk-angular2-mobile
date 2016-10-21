@@ -14,3 +14,4 @@ webpack
 .swagger-codegen-ignore
 .npmignore
 .npmrc
+npm-debug.log
