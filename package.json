@@ -1,6 +1,6 @@
 {
   "name": "hostme-sdk-angular2-mobile",
-  "version": "1.1.37",
+  "version": "1.1.38",
   "description": "HostMe angular2 SDK for Mobile APIs",
   "main": "index.js",
   "typings": "./dist/index.d.ts",
@@ -17,6 +17,7 @@
   "author": "Hostme",
   "license": "MIT",
   "peerDependencies": {
+	"@types/core-js": "^0.9.34",
     "@angular/common": "2.1.1",
     "@angular/compiler": "2.1.1",
     "@angular/core": "2.1.1",
@@ -28,8 +29,7 @@
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.26"
   },
-  "devDependencies": {
-    "@types/core-js": "^0.9.34",
+  "devDependencies": {    
     "@types/jasmine": "^2.5.36",
     "clean-webpack-plugin": "^0.1.13",
     "html-webpack-plugin": "^2.24.0",
