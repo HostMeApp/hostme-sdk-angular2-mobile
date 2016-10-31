@@ -5,3 +5,4 @@ typings
 index.js
 index.min.js
 npm-debug.log
+.vscode/

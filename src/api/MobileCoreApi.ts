@@ -389,7 +389,7 @@ export class MobileCoreApi {
      * @param model 
      */
     public addExternalLoginWithHttpInfo(model: models.AddExternalLogin, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/addExternalLogin`;
+        const path = this.configuration.basePath + '/api/core/mb/account/addExternalLogin';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -446,7 +446,7 @@ export class MobileCoreApi {
      * @param model 
      */
     public changePasswordWithHttpInfo(model: models.ChangePassword, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/changePassword`;
+        const path = this.configuration.basePath + '/api/core/mb/account/changePassword';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -503,7 +503,7 @@ export class MobileCoreApi {
      * @param checkinContract 
      */
     public checkInWithHttpInfo(checkinContract: models.TransactionCheckin, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/restaurant/checkin`;
+        const path = this.configuration.basePath + '/api/core/mb/restaurant/checkin';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -563,7 +563,7 @@ export class MobileCoreApi {
      * @param city 
      */
     public findRestaurantsWithHttpInfo(lat?: number, lon?: number, name?: string, city?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/restaurants/find`;
+        const path = this.configuration.basePath + '/api/core/mb/restaurants/find';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -617,7 +617,7 @@ export class MobileCoreApi {
      * 
      */
     public getAllRestaurantsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/restaurants`;
+        const path = this.configuration.basePath + '/api/core/mb/restaurants';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -659,7 +659,7 @@ export class MobileCoreApi {
      * 
      */
     public getListOfLocationsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/locations`;
+        const path = this.configuration.basePath + '/api/core/mb/locations';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -703,7 +703,7 @@ export class MobileCoreApi {
      * @param generateState 
      */
     public getManageInfoWithHttpInfo(returnUrl: string, generateState?: boolean, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/manageInfo`;
+        const path = this.configuration.basePath + '/api/core/mb/account/manageInfo';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -756,7 +756,7 @@ export class MobileCoreApi {
      * @param token 
      */
     public getRegistrationTokenWithHttpInfo(token: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/campaign/${token}`;
+        const path = this.configuration.basePath + '/api/core/mb/campaign/${token}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -807,7 +807,7 @@ export class MobileCoreApi {
      * @param areas 
      */
     public getReservationAvailabilityWithHttpInfo(restaurantId: number, date: Date, partySize: number, rangeInMinutes: number, areas?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/restaurants/${restaurantId}/availability`;
+        const path = this.configuration.basePath + '/api/core/mb/restaurants/${restaurantId}/availability';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -878,7 +878,7 @@ export class MobileCoreApi {
      * @param id 
      */
     public getRestaurantByIdWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/restaurants/${id}`;
+        const path = this.configuration.basePath + '/api/core/mb/restaurants/${id}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -924,7 +924,7 @@ export class MobileCoreApi {
      * 
      */
     public getUserInfoWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/userInfo`;
+        const path = this.configuration.basePath + '/api/core/mb/account/userInfo';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -966,7 +966,7 @@ export class MobileCoreApi {
      * 
      */
     public getUserProfileWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/profile`;
+        const path = this.configuration.basePath + '/api/core/mb/account/profile';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1009,7 +1009,7 @@ export class MobileCoreApi {
      * @param image 
      */
     public postProfileImageWithHttpInfo(image: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/profile/image`;
+        const path = this.configuration.basePath + '/api/core/mb/account/profile/image';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1060,7 +1060,7 @@ export class MobileCoreApi {
      * 
      */
     public profileImageWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/profile/image`;
+        const path = this.configuration.basePath + '/api/core/mb/account/profile/image';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1104,7 +1104,7 @@ export class MobileCoreApi {
      * @param model 
      */
     public registerWithHttpInfo(model: models.RegisterUser, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/register`;
+        const path = this.configuration.basePath + '/api/core/mb/account/register';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1161,7 +1161,7 @@ export class MobileCoreApi {
      * @param model 
      */
     public registerExternalWithHttpInfo(model: models.RegisterExternalUser, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/registerExternal`;
+        const path = this.configuration.basePath + '/api/core/mb/account/registerExternal';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1218,7 +1218,7 @@ export class MobileCoreApi {
      * @param model 
      */
     public removeLoginWithHttpInfo(model: models.RemoveLogin, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/removeLogin`;
+        const path = this.configuration.basePath + '/api/core/mb/account/removeLogin';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1275,7 +1275,7 @@ export class MobileCoreApi {
      * @param model 
      */
     public resetPasswordWithHttpInfo(model: models.ResetPassword, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/resetPassword`;
+        const path = this.configuration.basePath + '/api/core/mb/account/resetPassword';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1332,7 +1332,7 @@ export class MobileCoreApi {
      * @param model 
      */
     public setPasswordWithHttpInfo(model: models.SetPassword, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/setPassword`;
+        const path = this.configuration.basePath + '/api/core/mb/account/setPassword';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1389,7 +1389,7 @@ export class MobileCoreApi {
      * @param channel 
      */
     public setPushChannelAsyncWithHttpInfo(channel: models.SetPushChannel, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/setPushChannel`;
+        const path = this.configuration.basePath + '/api/core/mb/account/setPushChannel';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -1446,7 +1446,7 @@ export class MobileCoreApi {
      * @param profile 
      */
     public updateUserProfileWithHttpInfo(profile: models.UserProfile, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/core/mb/account/profile`;
+        const path = this.configuration.basePath + '/api/core/mb/account/profile';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

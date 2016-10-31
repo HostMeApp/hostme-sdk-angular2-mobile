@@ -213,7 +213,7 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId 
      */
     public checkInWithWaitingWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/checkin`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/${waitingItemId}/checkin';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -260,7 +260,7 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Identifier of the waiting item
      */
     public closeWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/close`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/${waitingItemId}/close';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -308,7 +308,7 @@ export class MobileWaitingManagementApi {
      * @param conf Conformation model
      */
     public confirmWithAppWithHttpInfo(confirmationCode: number, conf: models.PhoneConfirmation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/confirm/${confirmationCode}`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/confirm/${confirmationCode}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -369,7 +369,7 @@ export class MobileWaitingManagementApi {
      * @param value 
      */
     public getInLineWithHttpInfo(value: models.PutInLine, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -425,7 +425,7 @@ export class MobileWaitingManagementApi {
      * 
      */
     public getUserCurrentWaitingWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -468,7 +468,7 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public leaveTheLineWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/cancel`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/${waitingItemId}/cancel';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -515,7 +515,7 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public markAllMessagesAsReadWithHttpInfo(waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/messages/readall`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/${waitingItemId}/messages/readall';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -563,7 +563,7 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public putOnHoldWithHttpInfo(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/putonhold`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/${waitingItemId}/putonhold';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -618,7 +618,7 @@ export class MobileWaitingManagementApi {
      * @param createMessage The body of the message
      */
     public sendMessageToWaitingWithHttpInfo(waitingItemId: number, createMessage: models.CreateMessage, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/sendmessage`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/${waitingItemId}/sendmessage';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -680,7 +680,7 @@ export class MobileWaitingManagementApi {
      * @param waitingItemId Waiting item identifier
      */
     public takeOffHoldWithHttpInfo(restaurantId: number, waitingItemId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/wm/mb/waitings/${waitingItemId}/takeoffhold`;
+        const path = this.configuration.basePath + '/api/wm/mb/waitings/${waitingItemId}/takeoffhold';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

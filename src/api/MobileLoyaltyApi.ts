@@ -195,7 +195,7 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public cancelMembershipAtRestaurantWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -242,7 +242,7 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public enrollIntoLoyaltyProgramWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -288,7 +288,7 @@ export class MobileLoyaltyApi {
      * 
      */
     public getAllUserMembershipsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -331,7 +331,7 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getCustomerRedeemRequestsWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/redeems`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}/redeems';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -378,7 +378,7 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getMemberRewardOptionsWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/rewards`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}/rewards';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -425,7 +425,7 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getMemberTransactionsWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/transactions`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}/transactions';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -472,7 +472,7 @@ export class MobileLoyaltyApi {
      * @param restaurantId 
      */
     public getMembershipByRestaurantIdWithHttpInfo(restaurantId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -520,7 +520,7 @@ export class MobileLoyaltyApi {
      * @param redeemId 
      */
     public getRedeemRequestInfoWithHttpInfo(restaurantId: number, redeemId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/redeems/${redeemId}`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}/redeems/${redeemId}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -572,7 +572,7 @@ export class MobileLoyaltyApi {
      * @param rewardId 
      */
     public submitRequestForRedeemWithHttpInfo(restaurantId: number, rewardId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/loyalty/mb/membership/${restaurantId}/rewards/${rewardId}/redeem`;
+        const path = this.configuration.basePath + '/api/loyalty/mb/membership/${restaurantId}/rewards/${rewardId}/redeem';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

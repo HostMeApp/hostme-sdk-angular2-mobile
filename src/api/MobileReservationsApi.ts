@@ -165,7 +165,7 @@ export class MobileReservationsApi {
      * @param value 
      */
     public addNewReservationWithHttpInfo(value: models.CreateCustomerReservation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/rsv/mb/reservations`;
+        const path = this.configuration.basePath + '/api/rsv/mb/reservations';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -223,7 +223,7 @@ export class MobileReservationsApi {
      * @param cancelReservationContract 
      */
     public closeAsCanceledWithHttpInfo(reservationId: string, cancelReservationContract: models.CancelReservation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}/cancel`;
+        const path = this.configuration.basePath + '/api/rsv/mb/reservations/${reservationId}/cancel';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -284,7 +284,7 @@ export class MobileReservationsApi {
      * @param reservationId 
      */
     public getReservationByIdWithHttpInfo(reservationId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}`;
+        const path = this.configuration.basePath + '/api/rsv/mb/reservations/${reservationId}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -331,7 +331,7 @@ export class MobileReservationsApi {
      * @param queryOptions 
      */
     public getUserReservationsWithHttpInfo(queryOptions?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/rsv/mb/reservations`;
+        const path = this.configuration.basePath + '/api/rsv/mb/reservations';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -377,7 +377,7 @@ export class MobileReservationsApi {
      * @param reservationId Reservation identifier
      */
     public readAllMessageWithHttpInfo(reservationId: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}/messages/readall`;
+        const path = this.configuration.basePath + '/api/rsv/mb/reservations/${reservationId}/messages/readall';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -425,7 +425,7 @@ export class MobileReservationsApi {
      * @param createMessageContract The message with body
      */
     public sendMessageToReservationWithHttpInfo(reservationId: string, createMessageContract: models.CreateMessage, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}/messages`;
+        const path = this.configuration.basePath + '/api/rsv/mb/reservations/${reservationId}/messages';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -487,7 +487,7 @@ export class MobileReservationsApi {
      * @param value 
      */
     public updateReservationWithHttpInfo(reservationId: string, value: models.UpdateReservation, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/api/rsv/mb/reservations/${reservationId}`;
+        const path = this.configuration.basePath + '/api/rsv/mb/reservations/${reservationId}';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

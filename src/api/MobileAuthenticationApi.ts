@@ -100,7 +100,7 @@ export class MobileAuthenticationApi {
      * @param accessToken 
      */
     public getExternalFacebookLoginWithHttpInfo(accessToken: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/authorization/externalFacebookLogin`;
+        const path = this.configuration.basePath + '/authorization/externalFacebookLogin';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -146,7 +146,7 @@ export class MobileAuthenticationApi {
      * @param error 
      */
     public getExternalLoginWithHttpInfo(provider: string, error?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/authorization/externalLogin`;
+        const path = this.configuration.basePath + '/authorization/externalLogin';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -195,7 +195,7 @@ export class MobileAuthenticationApi {
      * @param generateState 
      */
     public getExternalLoginsWithHttpInfo(returnUrl: string, generateState?: boolean, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.configuration.basePath + `/authorization/externalLogins`;
+        const path = this.configuration.basePath + '/authorization/externalLogins';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

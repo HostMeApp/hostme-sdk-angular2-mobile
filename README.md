@@ -36,9 +36,11 @@ TODO: paste example.
 If different than the generated base path, during app bootstrap, you can provide the base path to your service. 
 
 ```
-import { BASE_PATH } from './path-to-swagger-gen-service/index';
+import { Configuration } from 'hostme-sdk-angular2-admin';
+
+const configurationFactory = () => { return new Configuration('https://your-web-service.com'); };
 
 bootstrap(AppComponent, [
-    { provide: BASE_PATH, useValue: 'https://your-web-service.com' },
+    { provide: Configuration, useFactory: configurationFactory },
 ]);
 ```  
