@@ -15,9 +15,9 @@
     "test": "karma start ./karma/karma.conf.js"
   },
   "author": "Hostme",
-  "license": "MIT",
+  "license": "Apache License v2.0",
   "peerDependencies": {
-	  "@types/core-js": "^0.9.34",
+	"@types/core-js": "^0.9.34",
 
     "@angular/common": "2.1.2",
     "@angular/compiler": "2.1.2",
